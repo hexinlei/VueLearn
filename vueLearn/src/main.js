@@ -2,18 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import Components from './components/'
-
-// const Foo = { template: '<div>foo</div>' }
-// const Bar = { template: '<div>bar</div>' }
-
-// const routes = [
-//   { path: '/foo', component: Foo },
-//   { path: '/bar', component: Bar }
-// ]
+import store from './store/'
+// import routerConfig from './router/index.js'
+import router from './router/index1.js'
 
 //  初始化 elementUI 组件
 Object.keys(ElementUI).forEach((key) => {
@@ -26,19 +21,30 @@ Object.keys(Components).forEach((key) => {
   Vue.component(`a${name}`, Components[key])
 })
 
-Vue.use(VueRouter)
-
+// Vue.use(VueRouter)
 // const router = new VueRouter({
-//   Routers // （缩写）相当于 routes: routes
+//   routes: routerConfig
 // })
 
-const router = new VueRouter(require('./router/index'))
+// router.beforeEach(({meta, path}, from, next) => {
+//   console.log(next)
+//   // var { auth = true } = meta;
+//   // var isLogin = Boolean(store.state.login.token) //true用户已登录， false用户未登录
+
+//   // if (auth && !isLogin && path !== '/login') {
+//   //   return next({ path: '/login' })
+//   // }
+//   // if(isLogin && (path == '/login' || path == '/reg')){
+//   //  return next({ path: '/person' })
+//   //  }
+//   next()
+// })
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router: router,
+  router,
+  store,
   render: h => h(App)
-})
+}).$mount('#app')

@@ -17,6 +17,7 @@
   export default {
     name: 'folderContents',
     props: ['children', 'breadcrumbs'],
+    // todo 面包屑数据结构需要调整
     methods: {
       say (f) {
         var breadcrumbs = this.breadcrumbs
@@ -24,16 +25,16 @@
           breadcrumbs.splice(0, breadcrumbs.length)
         }
         this.breadcrumbName(f, breadcrumbs)
-        breadcrumbs.push({'name': f.name})
+        // breadcrumbs.push({'name': f.name})
       },
       breadcrumbName (item, breadcrumbs) {
         var parent = item.parent
         if (parent) {
-          // breadcrumbs.push({'name': parent.name})
-          this.breadcrumbName(parent, breadcrumbs)
-          breadcrumbs.push({'name': parent.name})
-        } else {
-          // breadcrumbs.push({'name': item.name})
+          var parents = parent.split(';')
+          parents.forEach((key) => {
+            breadcrumbs.push({'name': key})
+          })
+          breadcrumbs.push({'name': item.name})
         }
       }
     }

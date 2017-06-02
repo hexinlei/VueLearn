@@ -64,6 +64,7 @@
 </template>
 
 <script>
+
   export default {
     name: 'orderList',
     methods: {
@@ -87,6 +88,7 @@
     data () {
       return {
         currentPage4: 1,
+        catalogs: {},
         tableData: [{
           date: '2016-05-03',
           name: '王小虎',
